@@ -1,37 +1,36 @@
-<!DOCTYPE html>
-<html xmlns:th:"http://www.thymeleaf.org">
-  <head>
-    <title>StudentList</title>
-    <meta http-equiv="Content-View" context"text/html" charset="UTF-8">
-  </head>
-  <body>
-    <h1>Books</h1>
-    <table>
-    	<tbody>
-    		<tr>
-	    		<th>Author</th>
-	    		<th>Title</th>
-	    		<th>Isbn</th>
-	    		<th>Year</th>
-	    		<th>Price</th>
-	    		<th>Category</th>
-    		</tr>
-    		<tr th:each = "book : ${books}">
-    			<td th:text="${book.author}"></td>
-    			<td th:text="${book.title}"></td>
-    			<td th:text="${book.isbn}"></td>
-    			<td th:text="${book.year}"></td>
-    			<td th:text="${book.price}"></td>
-    			<td th:text="${book.category.name}"></td>
-    			<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>    		
-    			<td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>    		
-    			
-    			
-    			
-    		</tr>
-    	</tbody>
-    </table>
-    <a href= "/add">Add Book</a>
-    
-  </body>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Booklist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Book List</h1>
+    <table class="table table-striped">
+		<tr>
+			<th>Id</th>
+		    <th>Title</th>
+		    <th>Author</th>
+		    <th>ISBN</th>
+		    <th>Year</th>
+		    <th>Price(eu)</th>
+
+		</tr>  
+    	<tr th:each = "book : ${books}">
+    		<td th:text="${book.id}"></td>
+        	<td th:text="${book.title}"></td>
+    		<td th:text="${book.author}"></td>
+    		<td th:text="${book.isbn}"></td>
+    		<td th:text="${book.year}"></td>
+    		<td th:text="${book.price}"></td>
+ 				<td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
+ 				<td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-success">Edit</a></td>    		
+    		
+
+    	</tr>
+     </table>
+	 <a href="/add" class="btn btn-success" >Add Book</a>    	
+
+</body>
 </html>
