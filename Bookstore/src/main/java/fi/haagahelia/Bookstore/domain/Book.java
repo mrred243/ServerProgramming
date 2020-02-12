@@ -1,9 +1,12 @@
 package fi.haagahelia.Bookstore.domain;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -11,21 +14,35 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	
-	private Long id;
-	private String title, author, isbn;
-	private int year,  price;
+	public Long id;
+	public String title, author, isbn;
+	public int year,  price;
+	
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	private Category category;
 	
 	
 	
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	public Book() {}
 	
-	public Book(String title, String author, String isbn, int year, int price) {
+	public Book(String title, String author, String isbn, int year, int price, Category category) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.isbn = isbn;
 		this.year = year;
 		this.price = price;
+		this.category = category;
 	}
 
 	public Long getId() {

@@ -1,6 +1,5 @@
 package fi.haagahelia.Bookstore.web;
 
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -13,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fi.haagahelia.Bookstore.domain.Book;
 import fi.haagahelia.Bookstore.domain.BookRepository;
+import fi.haagahelia.Bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
 	
 	@Autowired
 	private BookRepository brepository;
+	@Autowired
+	private CategoryRepository crepository;
 		
 
     @RequestMapping(value = {"/", "/booklist"})
@@ -30,6 +32,7 @@ public class BookController {
     @RequestMapping(value = "/add")
     public String showAddBookForm(Model model){
     	model.addAttribute("book", new Book());
+    	model.addAttribute("categories", crepository.findAll());
         return "addbook";
     }     
     
@@ -48,6 +51,7 @@ public class BookController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String showEditForm(@PathVariable("id") Long id, Model model) {
     	model.addAttribute("book", brepository.findById(id));
+    	model.addAttribute("categories", crepository.findAll());
         return "editbook";
     }
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
