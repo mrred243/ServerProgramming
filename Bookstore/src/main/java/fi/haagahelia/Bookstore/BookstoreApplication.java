@@ -3,6 +3,8 @@ package fi.haagahelia.Bookstore;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
 import fi.haagahelia.Bookstore.domain.Book;
@@ -13,8 +15,13 @@ import fi.haagahelia.Bookstore.domain.User;
 import fi.haagahelia.Bookstore.domain.UserRepository;
 
 @SpringBootApplication
-public class BookstoreApplication {
+public class BookstoreApplication extends SpringBootServletInitializer {
 
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+	return application.sources(BookstoreApplication.class);
+	}
+	
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
