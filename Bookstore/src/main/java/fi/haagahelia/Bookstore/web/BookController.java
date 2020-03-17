@@ -75,5 +75,10 @@ public class BookController {
     	brepository.save(book);
         model.addAttribute("books", brepository.findAll());
         return "redirect:booklist";
-    }   
+    }
+    
+    @RequestMapping(value="/login")
+	public String login() {
+		return "login";
+	}  
 }
